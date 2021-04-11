@@ -1,7 +1,5 @@
-
-
 void drawMenu() {
-  for (int i = 0; i <= MENU_ITEM_COUNT ; i++) {
+  for (int i = 0; i < MENU_ITEM_COUNT ; i++) {
     int xPos = i * MENU_ITEM_WIDTH;
     if (isYes[i]) {
       drawHeart(xPos, 0, RIGHT_EMPTY);

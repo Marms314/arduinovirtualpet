@@ -16,7 +16,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 // Menu graphics size values
 #define MENU_ITEM_HEIGHT 13
 #define MENU_ITEM_WIDTH 16
-#define MENU_ITEM_COUNT 7
+#define MENU_ITEM_COUNT 4
 
 // Heart graphics size values
 #define HEART_HEIGHT 13
@@ -119,6 +119,26 @@ static const unsigned char PROGMEM apple_bmp[] =
   B00001101, B10110000
 };
 
+static const unsigned char PROGMEM eye_look_right_bmp[] =
+{ B00001100,
+  B00010010,
+  B00100101,
+  B00101101,
+  B00100101,
+  B00010010,
+  B00001100
+};
+
+static const unsigned char PROGMEM eye_look_left_bmp[] =
+{ B00001100,
+  B00010010,
+  B00101001,
+  B00101101,
+  B00101001,
+  B00010010,
+  B00001100
+};
+
 void setup() {
   Serial.begin(9600);
 
@@ -163,6 +183,9 @@ void loop() {
   display.clearDisplay();
   
   drawMenu();
+
+  drawPet(50, 20, "left");
+  drawPet(50, 30, "right");
 
   // Show this loop's graphics on the screen
   display.display();
