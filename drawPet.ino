@@ -1,17 +1,26 @@
-void drawPet(int xPos, int yPos, String leftOrRight) {
-  if (leftOrRight == "left") {
-    drawEyes(xPos, yPos, true);
-    drawEyes(xPos + 10, yPos, true);
-  } else {
-    drawEyes(xPos, yPos, false);
-    drawEyes(xPos + 10, yPos, false);
-  }
+void drawPet() {
+
+  drawIdlePet();
+  
 }
 
-void drawEyes(int xPos, int yPos, boolean isLookingLeft) {
-  if (isLookingLeft) {
-    display.drawBitmap(xPos, yPos, eye_look_left_bmp, 8, 7, SSD1306_WHITE);
+void drawIdlePet() {
+  if (jumpCount == 22){
+    jumpCount = 0;
   } else {
-    display.drawBitmap(xPos, yPos, eye_look_right_bmp, 8, 7, SSD1306_WHITE);
+    jumpCount++;
   }
+
+  if (xPos >= 128){
+    xPos = -24;
+  } else {
+    if(jumpCount > 5 && jumpCount < 17) {
+      xPos += 3;
+    } else if (jumpCount > 5 && jumpCount < 22){
+      xPos++;
+    }
+  }
+
+  int yPos = 30;
+  display.drawBitmap(xPos, yPos, jumpBmp[jumpCount], 40, 24, SSD1306_WHITE);
 }
