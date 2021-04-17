@@ -34,16 +34,16 @@ enum heartType {
 int btns[] = {2, 3, 4, 5};
 int btnReads[] = {0, 0, 0, 0};
 int prevBtnReads[] = {0, 0, 0, 0};
-int menuSelection = 0;
-boolean isYes[] = {false, false, false, false, false, false, false, false};
+byte menuSelection = 0;
+bool isYes[] = {false, false, false, false, false, false, false, false};
 
 // Create Pet animation variables
-int jumpFrame = 0;
+byte jumpFrame = 0;
 int xPos = -37;
 int yPos = 40;
-boolean isGoingRight = true;
-int petIdleCount = 0;
-int petRestCount = 0;
+bool isGoingRight = true;
+byte petIdleCount = 0;
+byte petRestCount = 0;
 
 // Bitmaps for graphics
 const uint8_t empty_heart_half_bmp[] PROGMEM =

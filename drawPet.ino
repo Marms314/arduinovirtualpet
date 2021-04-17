@@ -4,6 +4,7 @@ void drawPet() {
 
 }
 
+// Draws pet jumping from one side of the screen to the other
 void drawPetIdle() {
   // Reset jump animation once pet is offscreen
   if (xPos >= 129 && isGoingRight) { //Set up to go to the right
@@ -31,14 +32,16 @@ void drawPetIdle() {
     petIdleCount++;
   }
 
-  //Lest pet rest for 5 animation loops between jumps
+  // Resets idle 
   if (petIdleCount == 30) {
       petIdleCount = 0;
     }
 }
 
+// Draws pet standing still, but moving slightly up and down to emulate breathing
 void drawPetRest() {
-  if (petRestCount == 2) {
+
+  if (petRestCount == 2) { // Slows down the rest animation
     petRestCount = 0;
     if (jumpFrame == 2) { // Move through the first few jump animation frames
       jumpFrame = 0;
@@ -49,14 +52,15 @@ void drawPetRest() {
     petRestCount++;
   }
   
-  
+  // Match current movement direction
   if (isGoingRight) {
-    display.drawBitmap(xPos, yPos, jumpBmp[jumpFrame], 40, 24, SSD1306_WHITE);
+    display.drawBitmap(xPos, yPos, jumpBmp[jumpFrame], 37, 24, SSD1306_WHITE);
   } else if (!isGoingRight) {
-    drawBitmapMirrored(xPos, yPos, jumpBmp[jumpFrame], 40, 24, SSD1306_WHITE);
+    drawBitmapMirrored(xPos, yPos, jumpBmp[jumpFrame], 37, 24, SSD1306_WHITE);
   }
 }
 
+// Makes pet jump and moves their position
 void drawPetJump() {
   if (jumpFrame == 22) { // Move through jump animation frames
     jumpFrame = 0;
@@ -64,7 +68,8 @@ void drawPetJump() {
     jumpFrame++;
   }
 
-  if (jumpFrame > 7 && jumpFrame < 15) { // Calculate yPos based on jump animation frame
+  // Calculate yPos based on jump animation frame
+  if (jumpFrame > 7 && jumpFrame < 15) {
     yPos--;
   } else if (jumpFrame > 15 && jumpFrame < 18) {
     yPos++;
@@ -74,19 +79,20 @@ void drawPetJump() {
     yPos += 2;
   }
 
+  // Match current movement direction
   if (isGoingRight) {
     if (jumpFrame > 4 && jumpFrame < 17) { // Move frog to the right
       xPos += 2;
     } else if (jumpFrame > 3 && jumpFrame < 22) {
       xPos++;
     }
-    display.drawBitmap(xPos, yPos, jumpBmp[jumpFrame], 40, 24, SSD1306_WHITE);
+    display.drawBitmap(xPos, yPos, jumpBmp[jumpFrame], 37, 24, SSD1306_WHITE);
   } else {
     if (jumpFrame > 4 && jumpFrame < 17) { // Move frog to the left
       xPos -= 2;
     } else if (jumpFrame > 3 && jumpFrame < 22) {
       xPos--;
     }
-    drawBitmapMirrored(xPos, yPos, jumpBmp[jumpFrame], 40, 24, SSD1306_WHITE);
+    drawBitmapMirrored(xPos, yPos, jumpBmp[jumpFrame], 37, 24, SSD1306_WHITE);
   }
 }
