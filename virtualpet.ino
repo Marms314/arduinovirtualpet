@@ -36,13 +36,14 @@ int btnReads[] = {0, 0, 0, 0};
 int prevBtnReads[] = {0, 0, 0, 0};
 int menuSelection = 0;
 int jumpCount = 0;
-int xPos = -24;
+int xPos = -37;
 int yPos = 40;
+boolean isGoingRight = true;
 boolean isYes[] = {false, false, false, false, false, false, false, false};
 
 
 // Bitmaps for graphics
-static const unsigned char PROGMEM empty_heart_left_bmp[] =
+const uint8_t empty_heart_half_bmp[] PROGMEM =
 { B00111000,
   B01000100,
   B10000010,
@@ -58,23 +59,7 @@ static const unsigned char PROGMEM empty_heart_left_bmp[] =
   B00000001
 };
 
-static const unsigned char PROGMEM empty_heart_right_bmp[] =
-{ B00011100,
-  B00100010,
-  B01000001,
-  B10000001,
-  B00000001,
-  B00000001,
-  B00000010,
-  B00000100,
-  B00001000,
-  B00010000,
-  B00100000,
-  B01000000,
-  B10000000
-};
-
-static const unsigned char PROGMEM full_heart_left_bmp[] =
+const uint8_t full_heart_half_bmp[] PROGMEM =
 { B00111000,
   B01111100,
   B11111110,
@@ -90,23 +75,7 @@ static const unsigned char PROGMEM full_heart_left_bmp[] =
   B00000001
 };
 
-static const unsigned char PROGMEM full_heart_right_bmp[] =
-{ B00011100,
-  B00111110,
-  B01111111,
-  B11111111,
-  B11111111,
-  B11111111,
-  B11111110,
-  B11111100,
-  B11111000,
-  B11110000,
-  B11100000,
-  B11000000,
-  B10000000
-};
-
-static const unsigned char PROGMEM apple_bmp[] =
+const uint8_t apple_bmp[] PROGMEM =
 { B00000001, B10000000,
   B00111001, B00011100,
   B01111111, B01100110,
