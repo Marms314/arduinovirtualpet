@@ -18,16 +18,38 @@ void drawPetIdle() {
     isGoingRight = true;
   }
 
-  drawPetJump();
+  // Allow pet to rest between jumps
+  if (petIdleCount == 0 || petIdleCount == 1 || petIdleCount == 12 || petIdleCount == 25) {
+    drawPetJump();
+  } else {
+    drawPetRest();
+  }
+
+  // Each idle animation returns to frame 0 when done
+  // Use reaching frame 0 as the time to move to the next animation
+  if (jumpFrame == 0) {
+    petIdleCount++;
+  }
+
+  //Lest pet rest for 5 animation loops between jumps
+  if (petIdleCount == 30) {
+      petIdleCount = 0;
+    }
 }
 
 void drawPetRest() {
-  if (jumpFrame == 5) { // Move through the first few jump animation frames
-    jumpFrame = 0;
+  if (petRestCount == 2) {
+    petRestCount = 0;
+    if (jumpFrame == 2) { // Move through the first few jump animation frames
+      jumpFrame = 0;
+    } else {
+      jumpFrame++;
+    }
   } else {
-    jumpFrame++;
+    petRestCount++;
   }
-
+  
+  
   if (isGoingRight) {
     display.drawBitmap(xPos, yPos, jumpBmp[jumpFrame], 40, 24, SSD1306_WHITE);
   } else if (!isGoingRight) {
