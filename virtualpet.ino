@@ -35,12 +35,15 @@ int btns[] = {2, 3, 4, 5};
 int btnReads[] = {0, 0, 0, 0};
 int prevBtnReads[] = {0, 0, 0, 0};
 int menuSelection = 0;
-int jumpCount = 0;
+boolean isYes[] = {false, false, false, false, false, false, false, false};
+
+// Create Pet animation variables
+int jumpFrame = 0;
 int xPos = -37;
 int yPos = 40;
 boolean isGoingRight = true;
-boolean isYes[] = {false, false, false, false, false, false, false, false};
-
+int petIdlePattern[] = {};
+int petCurrentIdleCount = 0;
 
 // Bitmaps for graphics
 const uint8_t empty_heart_half_bmp[] PROGMEM =
@@ -392,6 +395,9 @@ void loop() {
   drawMenu();
 
   drawPet();
+
+  //Ground
+  display.drawLine(0, 63, 128, 63, SSD1306_WHITE);
 
   // Show this loop's graphics on the screen
   display.display();
