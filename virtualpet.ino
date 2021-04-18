@@ -16,34 +16,32 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 // Menu graphics size values
 #define MENU_ITEM_HEIGHT 13
 #define MENU_ITEM_WIDTH 16
-#define MENU_ITEM_COUNT 7
+#define MENU_ITEM_COUNT 3
 
 // Heart graphics size values
 #define HEART_HEIGHT 13
 #define HEART_HALF_WIDTH 8
-
-// Enums for use with drawHeart function
-enum heartType {
-  FULL = 1,
-  LEFT_EMPTY = 2,
-  RIGHT_EMPTY = 3,
-  EMPTY = 4
-};
 
 // Create button arrays. Order is: green, left, right, red
 int btns[] = {2, 3, 4, 5};
 int btnReads[] = {0, 0, 0, 0};
 int prevBtnReads[] = {0, 0, 0, 0};
 byte menuSelection = 0;
-bool isYes[] = {false, false, false, false, false, false, false, false};
 
 // Create Pet animation variables
-byte jumpFrame = 0;
-int xPos = -37;
-int yPos = 40;
-bool isGoingRight = true;
+byte jumpFramePet = 0;
+int xPosPet = -37;
+int yPosPet = 40;
+bool isFacingRightPet = true;
 byte petIdleCount = 0;
 byte petRestCount = 0;
+
+// Create enemy Pet animation variables
+byte jumpFramePetEnemy = 0;
+int xPosEnemy = 129;
+int yPosEnemy = 40;
+bool isFacingRightEnemy = false;
+byte enemyRestCount = 0;
 
 // Bitmaps for graphics
 const uint8_t empty_heart_half_bmp[] PROGMEM =
@@ -92,6 +90,22 @@ const uint8_t apple_bmp[] PROGMEM =
   B00011111, B11111000,
   B00011111, B11111000,
   B00001101, B10110000
+};
+
+const uint8_t boxing_glove_bmp[] PROGMEM =
+{ B00000001, B11110000,
+  B00000011, B11110000,
+  B00000111, B11100000,
+  B00001111, B11111110,
+  B11111111, B11011111,
+  B10011111, B10111111,
+  B10011111, B10111111,
+  B10011111, B10111111,
+  B10011111, B10111111,
+  B10011111, B10111111,
+  B11111111, B11011111,
+  B00001111, B11101110,
+  B00000111, B11111100
 };
 
 const uint8_t jumpBmp[23][120] PROGMEM = {
@@ -384,17 +398,16 @@ void loop() {
       menuSelection++;
     }
   } else if (inputData[0]) { // Green button/select
-    isYes[menuSelection] = true;
+    
   } else if (inputData[3]) { // Red button/deselect
-    isYes[menuSelection] = false;
+    
   }
 
   // Get rid of the last loop's drawn graphics
   display.clearDisplay();
 
   drawMenu();
-
-  drawPet();
+  drawPetIdle();
 
   //Ground
   display.drawLine(0, 63, 128, 63, SSD1306_WHITE);

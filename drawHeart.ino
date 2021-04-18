@@ -1,20 +1,20 @@
-void drawHeart(int xPos, int yPos, heartType type) {
+void drawHeart(byte xPosHeart, byte yPosHeart, byte type) {
   switch (type) {
-    case 1:
-      display.drawBitmap(xPos, yPos, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
-      drawBitmapMirrored(xPos + HEART_HALF_WIDTH, yPos, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+    case 1: // Full heart
+      display.drawBitmap(xPosHeart, yPosHeart, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+      drawBitmapMirrored(xPosHeart + HEART_HALF_WIDTH, yPosHeart, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
       break;
-    case 2:
-      display.drawBitmap(xPos, yPos, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
-      drawBitmapMirrored(xPos + HEART_HALF_WIDTH, yPos, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+    case 2: // Left empty heart
+      display.drawBitmap(xPosHeart, yPosHeart, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+      drawBitmapMirrored(xPosHeart + HEART_HALF_WIDTH, yPosHeart, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
       break;
-    case 3:
-      display.drawBitmap(xPos, yPos, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
-      drawBitmapMirrored(xPos + HEART_HALF_WIDTH, yPos, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+    case 3: // Right empty heart
+      display.drawBitmap(xPosHeart, yPosHeart, full_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+      drawBitmapMirrored(xPosHeart + HEART_HALF_WIDTH, yPosHeart, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
       break;
-    default:
-      display.drawBitmap(xPos, yPos, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
-      drawBitmapMirrored(xPos + HEART_HALF_WIDTH, yPos, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+    default: // Empty heart
+      display.drawBitmap(xPosHeart, yPosHeart, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
+      drawBitmapMirrored(xPosHeart + HEART_HALF_WIDTH, yPosHeart, empty_heart_half_bmp, HEART_HALF_WIDTH, HEART_HEIGHT, SSD1306_WHITE);
       break;
   }
 }
